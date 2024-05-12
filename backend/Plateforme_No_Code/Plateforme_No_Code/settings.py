@@ -15,7 +15,7 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
+MONGO_URI = f"mongodb://localhost:27017/NCP_DataBase"
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'django_filters',
     'User',
-    'Databases'
+    'Databases',
+    'ManageDatabases'
 ]
 
 MIDDLEWARE = [
@@ -85,7 +86,7 @@ WSGI_APPLICATION = 'Plateforme_No_Code.wsgi.application'
         'ENGINE': 'djongo',
         'NAME': 'NCP_DataBase',
         'CLIENT':{
-            "host": 'mongodb://localhost:27017'
+            "host": 'mongodb://localhost:27017/NCP_DataBase'
         } 
     }
 }

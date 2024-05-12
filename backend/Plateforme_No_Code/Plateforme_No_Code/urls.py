@@ -4,6 +4,7 @@ from django.urls import path, include
 from App.views import *
 from rest_framework.schemas import get_schema_view
 from User.views import *
+from ManageDatabases.views import *
 from django.urls import re_path
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
@@ -46,8 +47,18 @@ urlpatterns = [
     path('entities/', EntityListCreate.as_view(), name='entities-list'),
     path('entities/<int:pk>/', EntityDetailAPIView.as_view(), name='entities-detail'),
     path('entitiesByDatabase/', EntitiesByDatabaseAPIView.as_view(), name='entities_by_db'),
+   
     path('swagger<format>/', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+   
+   
+    path('DatabasesApp/', CreateDatabaseAPIView.as_view(), name='db'),
+    path('Collection/', CollectionAPIView.as_view(), name='collection'),
+    path('Document/', DocumentsAPIView.as_view(), name='get_documents'),
+    path('DocumentsById/', DocumentFilterAPIView.as_view(), name="get_document_by_id"),
+    path('Attribute/', AttributesAPIView.as_view(), name='attributes'),
+
+   
 
 ]
