@@ -38,6 +38,7 @@ def insert_to_collection(db_name, collection_name, body):
         client = connect_to_mongo()
         db = client[db_name]
         collection = db[collection_name]
+        print(body)
         collection.insert_one(body)
         return True, "Attributes INSERTED SUCCESSFULLY."
     except Exception as e:
@@ -65,16 +66,25 @@ def rename_collection(db_name, old_collection_name, new_collection_name):
     finally:
         client.close()
 
+
 def rename_database(old_db_name, new_db_name):
     try:
         client = connect_to_mongo()
         # Créer une nouvelle base de données avec le nouveau nom
         old_db = client[old_db_name]
         new_db = client[new_db_name]
+
+        # Copier chaque collection de l'ancienne base de données vers la nouvelle
         for collection_name in old_db.list_collection_names():
             old_collection = old_db[collection_name]
             new_collection = new_db[collection_name]
-            new_collection.insert_many(old_collection.find())
+            
+            # Copier tous les documents de l'ancienne collection à la nouvelle
+            documents = list(old_collection.find())
+            if documents:
+                new_collection.insert_many(documents)
+
+        # Supprimer l'ancienne base de données
         client.drop_database(old_db_name)
 
         return True, "UPDATED SUCCESSFULLY"
