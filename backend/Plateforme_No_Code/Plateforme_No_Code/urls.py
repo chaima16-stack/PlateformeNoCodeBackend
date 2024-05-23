@@ -58,7 +58,9 @@ urlpatterns = [
     path('Document/', DocumentsAPIView.as_view(), name='get_documents'),
     path('DocumentsById/', DocumentFilterAPIView.as_view(), name="get_document_by_id"),
     path('Attribute/', AttributesAPIView.as_view(), name='attributes'),
-
+    
+   path('login/', GoogleOAuthLogin.as_view(), name='google_oauth_login'),
+   path('DecodeToken/', DecodeTokenView.as_view(), name='Decode_token'),
    
 
 ]

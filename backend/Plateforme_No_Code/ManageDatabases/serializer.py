@@ -7,9 +7,8 @@ class CreateDatabaseRequestSerializer(serializers.Serializer):
 
 class CreateCollectionSerializer(serializers.Serializer):
     id= serializers.CharField()
-    attributes = serializers.DictField(
-        child=serializers.CharField(),  # Les clés sont les noms des attributs et les valeurs sont les types
-        help_text="Attributs avec leurs types à ajouter à la collection"
+    attributes = serializers.JSONField(
+        help_text="Attributs avec leurs types à ajouter à la collection. Peut inclure des tableaux de JSON."
     )
     db_name = serializers.CharField()
     collection_name = serializers.CharField()   
