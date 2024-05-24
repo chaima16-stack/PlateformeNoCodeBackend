@@ -10,7 +10,7 @@ from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from Databases.views import *
-
+from Workflow.views import *
 schema_view = get_schema_view(
    openapi.Info(
       title="Snippets API",
@@ -58,7 +58,7 @@ urlpatterns = [
     path('Document/', DocumentsAPIView.as_view(), name='get_documents'),
     path('DocumentsById/', DocumentFilterAPIView.as_view(), name="get_document_by_id"),
     path('Attribute/', AttributesAPIView.as_view(), name='attributes'),
-
-   
+    path('login/', GoogleOAuthLogin.as_view(), name='google_oauth_login'),
+    path('DecodeToken/', DecodeTokenView.as_view(), name='Decode_token'),
 
 ]

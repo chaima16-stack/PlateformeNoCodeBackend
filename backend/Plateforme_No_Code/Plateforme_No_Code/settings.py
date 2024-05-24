@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'django_filters',
     'User',
     'Databases',
-    'ManageDatabases'
+    'ManageDatabases',
+    'Workflow'
 ]
 
 MIDDLEWARE = [
