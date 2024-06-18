@@ -59,7 +59,18 @@ urlpatterns = [
     path('DocumentsById/', DocumentFilterAPIView.as_view(), name="get_document_by_id"),
     path('Attribute/', AttributesAPIView.as_view(), name='attributes'),
 
+
+    path('events/', EventListCreate.as_view(), name='event-list'),
+    path('events/<int:pk>/', EventDetailAPIView.as_view(), name='event-detail'),
+    path('actions/', ActionListCreate.as_view(), name='action-list'),
+    path('actions/<int:pk>/', ActionDetailAPIView.as_view(), name='action-detail'),
+    path('elementsactions/', ElementActionListCreate.as_view(), name='elementaction-list'),
+    path('elementsactions/<int:pk>/', ElementActionDetailAPIView.as_view(), name='elementaction-detail'),
+    path('EventByElement/', EventByElementAPIView.as_view(), name='event_by_element'),
+    path('ActionByEvent/', ActionByEventAPIView.as_view(), name='action_by_event'),
+    path('Actionelement/' , ActionElementAPIView.as_view(), name='action_by_element'),
+
     path('login/', GoogleOAuthLogin.as_view(), name='google_oauth_login'),
     path('DecodeToken/', DecodeTokenView.as_view(), name='Decode_token'),
-
+     path('Token/', GetToken.as_view(), name='get_token'),
 ]

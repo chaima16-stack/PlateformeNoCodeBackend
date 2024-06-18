@@ -7,3 +7,5 @@ class UserSerializer(serializers.ModelSerializer):
 
 class AuthentificationSerializer(serializers.Serializer):
     token = serializers.CharField()
+class TokenSerializer(serializers.Serializer):
+    id = serializers.CharField()
