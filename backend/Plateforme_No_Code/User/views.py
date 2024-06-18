@@ -21,17 +21,14 @@ class UserListCreateAPIView(generics.ListCreateAPIView):
 class UserDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-def generate_jwt_token(user):
+def generate_jwt_token(id):
         """
             Generate JWT token for the authenticated user.
-        """
-        app = App.objects.filter(user=user.id_user)
-       
+        """       
     # Define payload for JWT token
         payload = {
-        'user_id': user.id_user,
-
-        'exp': datetime.utcnow() + timedelta(days=1)  # Token expiration time (1 day)
+        'user_id': id,
+        'exp': datetime.now()+ timedelta(days=1)  # Token expiration time (1 day)
     }
     # Generate JWT token using secret key defined in Django settings
         token = jwt.encode(payload, settings.SECRET_KEY, algorithm='HS256')
@@ -60,7 +57,7 @@ class GoogleOAuthLogin(APIView):
                     user.save()
 
              
-                jwt_token = generate_jwt_token(user)
+                jwt_token = generate_jwt_token(user.id_user)
                 return Response({'token': jwt_token})
                 
             else:
@@ -87,3 +84,12 @@ class DecodeTokenView(APIView):
         decoded_token = decode_jwt_token(token)
 
         return Response(decoded_token)
+    
+class GetToken(APIView):
+    @swagger_auto_schema(query_serializer=TokenSerializer)
+    def get(self, request):
+        id = request.query_params.get('id')
+        if not id:
+            return Response({'error': 'Token not provided'}, status=status.HTTP_400_BAD_REQUEST)
+        jwt_token = generate_jwt_token(id)
+        return Response({'token': jwt_token})
