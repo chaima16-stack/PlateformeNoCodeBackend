@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'User',
     'Databases',
     'ManageDatabases',
-    'Workflow'
+    'Workflow',
 ]
 
 MIDDLEWARE = [
