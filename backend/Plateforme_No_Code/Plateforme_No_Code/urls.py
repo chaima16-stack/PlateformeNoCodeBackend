@@ -69,7 +69,7 @@ urlpatterns = [
     path('EventByElement/', EventByElementAPIView.as_view(), name='event_by_element'),
     path('ActionByEvent/', ActionByEventAPIView.as_view(), name='action_by_event'),
     path('Actionelement/' , ActionElementAPIView.as_view(), name='action_by_element'),
-
+   
     path('login/', GoogleOAuthLogin.as_view(), name='google_oauth_login'),
     path('DecodeToken/', DecodeTokenView.as_view(), name='Decode_token'),
      path('Token/', GetToken.as_view(), name='get_token'),

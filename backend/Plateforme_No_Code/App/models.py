@@ -36,6 +36,8 @@ class Element(models.Model):
     screen = models.ForeignKey(Screen, related_name='elements', on_delete=models.CASCADE)
     type_element = models.CharField(max_length=100)#, choices=[(tag, tag.value) for tag in ElementType])
     label = models.CharField(max_length=100)
+    color = models.CharField(max_length=100, null=True)
+    textcolor = models.CharField(max_length=100,null=True)
     position = models.CharField(max_length=100)
     date_creation = models.DateField()
     date_update = models.DateField()
